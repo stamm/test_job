@@ -1,0 +1,27 @@
+language: ruby
+rvm:
+#  - 1.9.3
+  - 2.0.0
+#  - rbx-19mode
+#  - jruby-19mode
+matrix:
+  allow_failures:
+    - rvm: rbx-19mode
+env:
+#  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
+before_install:
+  - gem install bundler
+bundler_args: "--without development"
+before_script:
+  - psql -c 'create database "test_job_test";' -U postgres;
+  - mysql -uroot -e 'create database `test_job_test`'
+  - mysql -uroot -e 'GRANT ALL ON `test_job_test`.* TO "test_job"@"localhost" IDENTIFIED BY "test_job_passw0rd"; FLUSH PRIVILEGES;'
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - cp config/application.yml.example config/application.yml
+
+script: "bundle exec rspec spec/"
+notifications:
+  email:
+    - rustam@zagirov.name

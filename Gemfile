@@ -1,28 +1,43 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+group :development, :test do
+  gem 'guard-rspec', '3.0.2'
+  gem 'rspec-rails', '2.14.0'
+end
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :assets do
+  gem 'coffee-rails', '4.0.0'
+  gem 'sass-rails', '4.0.0'
+  gem 'uglifier', '2.1.2'
+end
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+group :development do
+  gem 'better_errors', '0.9.0'
+  gem 'binding_of_caller', '0.7.2'
+  gem 'spring', '0.0.10'
+end
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+group :test do
+  gem 'capybara', '2.1.0'
+  gem 'database_cleaner', '1.0.1'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'ffaker', '1.16.2'
+  gem 'rb-fsevent', '0.9.3', require: false
+  gem 'terminal-notifier-guard', '1.5.3'
+  gem 'timecop', '0.6.2.2'
+end
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'rails', '4.0.0'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jquery-rails', '3.0.4'
+gem 'jbuilder', '1.5.0'
+gem 'mysql2', '0.3.13'
+gem 'pg', '0.16'
+gem 'quiet_assets', '1.0.2'
+gem 'slim', '2.0.0'
+gem 'unicorn', '4.6.3'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

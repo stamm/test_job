@@ -31,6 +31,7 @@ end
 
 gem 'rails', '4.0.0'
 
+gem 'figaro', '0.7.0'
 gem 'jquery-rails', '3.0.4'
 gem 'jbuilder', '1.5.0'
 gem 'mysql2', '0.3.13'

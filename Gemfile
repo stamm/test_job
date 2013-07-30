@@ -38,7 +38,7 @@ gem 'jbuilder', '1.5.0'
 gem 'mysql2', '0.3.13'
 gem 'pg', '0.16'
 gem 'quiet_assets', '1.0.2'
-gem 'slim', '2.0.0'
+gem 'slim-rails', '2.0.1'
 gem 'unicorn', '4.6.3'
 
 group :doc do

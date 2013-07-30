@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20130730161951) do
   create_table "products", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.decimal  "price",       precision: 10, scale: 0
+    t.decimal  "price",       precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

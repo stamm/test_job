@@ -12,4 +12,7 @@ table.table
     td colspan=2 Total
     td.item_price = number_to_currency(@cart.total_price)
 
+
+== button_to 'Checkout', orders_path, method: :post
+
 == button_to 'Empty cart', @cart, method: :delete, confirm: 'Are you sure?'

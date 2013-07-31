@@ -25,4 +25,18 @@ describe Cart do
       expect(line_item.quantity).to eq(2)
     end
   end
+
+  it '#total_price' do
+    product1 = create :product, price: 3
+    product2 = create :product, price: 7
+    subject.save!
+    line_item1 = subject.add_product(product1.id)
+    line_item1.save
+    line_item2 = subject.add_product(product2.id)
+    line_item2.save
+    expect { line_item1.update_attribute :quantity, 2 }.to change { subject.total_price }.from(10).to(13)
+    #expect(subject.total_price).to eq(10)
+    #line_item1.update_attribute :quantity, 2
+    #expect(subject.total_price).to eq(13)
+  end
 end

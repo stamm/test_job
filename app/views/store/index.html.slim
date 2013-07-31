@@ -1,10 +1,12 @@
 h1 Catalog of products
 table.table
   tr
-    th= Product.human_attribute_name(:title)
-    th= Product.human_attribute_name(:price)
+    th = Product.human_attribute_name(:title)
+    th = Product.human_attribute_name(:price)
     th
   - @products.each do |product|
     tr
-      td= product.title
-      td= number_to_currency(product.price, locale: :ru)
+      td = product.title
+      td.price_line
+        span.price = number_to_currency(product.price)
+        == button_to 'Add to Cart', line_items_path(product_id: product)

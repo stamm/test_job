@@ -20,7 +20,7 @@ module TestJob
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.time_zone = 'Moscow'
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = :en
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,

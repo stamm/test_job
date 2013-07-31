@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProductController do
+describe ProductsController do
 
   describe 'needing login' do
     describe 'GET index' do

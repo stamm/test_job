@@ -4,7 +4,7 @@ class OrdersController < AuthController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.all_include.order_by_create.page(params[:page]).per(20)
   end
 
   # GET /orders/1
@@ -24,26 +24,25 @@ class OrdersController < AuthController
   # POST /orders.json
   def create
     @cart = current_cart
-    if @cart.line_items.empty?
-      redirect_to store_url, notice: 'Your cart empty'
-      return
-    end
-    if @cart.total_price > current_user.balance
-      redirect_to @cart, notice: 'Need more gold!'
-      return
-    end
 
     @order = Order.new
     @order.user = current_user
     @order.add_line_items_from_cart(current_cart)
 
     respond_to do |format|
-      if @order.save
+      notice = []
+      begin
+        saved = @order.save
+      rescue Exception => e
+        notice = [e.message] || ['Error with order saving.']
+      end
+      if saved
         session[:cart_id] = nil
         format.html { redirect_to store_url, notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
-        format.html { redirect_to store_url, notice: 'Error with order saving.' }
+        notice = @order.errors.to_a unless @order.errors.empty?
+        format.html { redirect_to store_url, notice: notice.join('.') }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end

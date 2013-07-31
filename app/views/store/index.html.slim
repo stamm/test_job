@@ -1,0 +1,10 @@
+h1 Catalog of products
+table.table
+  tr
+    th= Product.human_attribute_name(:title)
+    th= Product.human_attribute_name(:price)
+    th
+  - @products.each do |product|
+    tr
+      td= product.title
+      td= number_to_currency(product.price, locale: :ru)

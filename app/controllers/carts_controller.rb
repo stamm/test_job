@@ -58,7 +58,7 @@ class CartsController < AuthController
     @cart.destroy
     session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to store_url, notice: 'Your cart is empty' }
+      format.html { redirect_to products_url, notice: 'Your cart is empty' }
       format.json { head :no_content }
     end
   end
@@ -69,7 +69,7 @@ class CartsController < AuthController
       begin
         @cart = current_cart
       rescue ActiveRecord::RecordNotFound
-        redirect_to store_url, notice: 'Unexisting Cart'
+        redirect_to products_url, notice: 'Unexisting Cart'
       end
     end
 

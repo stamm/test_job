@@ -38,11 +38,11 @@ class OrdersController < AuthController
       end
       if saved
         session[:cart_id] = nil
-        format.html { redirect_to store_url, notice: 'Order was successfully created.' }
+        format.html { redirect_to products_path, notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
         notice = @order.errors.to_a unless @order.errors.empty?
-        format.html { redirect_to store_url, notice: notice.join('.') }
+        format.html { redirect_to products_path, notice: notice.join('.') }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end

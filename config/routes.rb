@@ -4,8 +4,7 @@ TestJob::Application.routes.draw do
   resources :line_items
   resources :carts
 
-  get 'store/index', as: :store
-  post 'store/add_to_cart'
+  get 'products/index', as: :products
   post 'user/add_balance'
   devise_for :users, path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
 

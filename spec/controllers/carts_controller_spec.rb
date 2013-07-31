@@ -81,7 +81,7 @@ describe CartsController do
 
       it "redirects to the carts list" do
         delete :destroy, {:id => @cart.to_param}, @session
-        response.should redirect_to(store_url)
+        response.should redirect_to(products_url)
       end
     end
   end

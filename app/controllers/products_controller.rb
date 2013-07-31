@@ -1,4 +1,4 @@
-class StoreController < AuthController
+class ProductsController < AuthController
   def index
     @products = Product.order(:id)
     @current_cart = current_cart

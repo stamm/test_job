@@ -25,7 +25,7 @@ describe OrdersController do
   describe "GET #new" do
     it 'require items in cart' do
       get :create
-      expect(response).to redirect_to(store_path)
+      expect(response).to redirect_to(products_path)
     end
     it do
       product = create :product
@@ -40,7 +40,7 @@ describe OrdersController do
         get :create
       }.to change(Order, :count).by(1)
 
-      expect(response).to redirect_to(store_path)
+      expect(response).to redirect_to(products_path)
     end
   end
 

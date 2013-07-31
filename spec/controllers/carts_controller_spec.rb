@@ -66,4 +66,23 @@ describe CartsController do
     end
   end
 
+  context 'login in' do
+    login_user
+    describe "DELETE destroy" do
+      before(:each) do
+        @cart = Cart.create! valid_attributes
+        @session = {cart_id: @cart.id}
+      end
+      it "destroys the requested cart" do
+        expect {
+          delete :destroy, {:id => @cart.to_param}, @session
+        }.to change(Cart, :count).by(-1)
+      end
+
+      it "redirects to the carts list" do
+        delete :destroy, {:id => @cart.to_param}, @session
+        response.should redirect_to(store_url)
+      end
+    end
+  end
 end

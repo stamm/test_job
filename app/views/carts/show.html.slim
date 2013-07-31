@@ -1,4 +1,6 @@
 p#notice = notice
 ul
   - @cart.line_items.each do |item|
-    li = item.product.title
+    li = "#{item.quantity} x #{item.product.title}"
+
+== button_to 'Empty cart', @cart, method: :delete, confirm: 'Are you sure?'

@@ -12,13 +12,6 @@ class OrdersController < AuthController
   def show
   end
 
-  # GET /orders/new
-  def new
-  end
-
-  # GET /orders/1/edit
-  def edit
-  end
 
   # POST /orders
   # POST /orders.json

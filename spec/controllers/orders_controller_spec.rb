@@ -40,7 +40,7 @@ describe OrdersController do
         get :create
       }.to change(Order, :count).by(1)
 
-      expect(response).to redirect_to(products_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 

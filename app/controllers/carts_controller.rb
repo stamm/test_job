@@ -1,12 +1,6 @@
 class CartsController < AuthController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
-  # GET /carts
-  # GET /carts.json
-  def index
-    @carts = Cart.all
-  end
-
   # GET /carts/1
   # GET /carts/1.json
   def show
@@ -21,33 +15,11 @@ class CartsController < AuthController
     @cart = Cart.new
   end
 
-  # GET /carts/1/edit
-  def edit
-    Time.now
-  end
-
-  # POST /carts
-  # POST /carts.json
-  def create
-    @cart = Cart.new(cart_params)
-
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @cart }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /carts/1
   # PATCH/PUT /carts/1.json
   def update
     respond_to do |format|
       saved = @cart.update_attributes(cart_params)
-      puts 'ok'
       @cart.line_items.select{ |item| item.quantity <= 0 }.map(&:destroy)
       if saved
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
@@ -65,7 +37,7 @@ class CartsController < AuthController
     @cart.destroy
     session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Your cart is empty' }
+      format.html { redirect_to root_url, notice: 'Your cart is empty' }
       format.json { head :no_content }
     end
   end
@@ -76,10 +48,10 @@ class CartsController < AuthController
       begin
         @cart = current_cart
         if @cart.id != params[:id].to_i
-          redirect_to products_url, notice: 'Not yours Cart'
+          redirect_to root_url, notice: 'Not yours Cart'
         end
       rescue ActiveRecord::RecordNotFound
-        redirect_to products_url, notice: 'Unexisting Cart'
+        redirect_to root_url, notice: 'Unexisting Cart'
       end
     end
 

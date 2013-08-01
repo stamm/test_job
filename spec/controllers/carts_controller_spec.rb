@@ -35,11 +35,6 @@ describe CartsController do
 
 
 
-    it "POST create" do
-      post :create
-      expect(response).to redirect_to(new_user_session_path)
-    end
-
     context 'with exists cart' do
       before(:each) do
         @cart = Cart.create! valid_attributes
@@ -81,7 +76,7 @@ describe CartsController do
 
       it "redirects to the carts list" do
         delete :destroy, {:id => @cart.to_param}, @session
-        response.should redirect_to(products_url)
+        response.should redirect_to(root_url)
       end
     end
   end

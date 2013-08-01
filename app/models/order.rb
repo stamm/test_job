@@ -39,7 +39,7 @@ class Order < ActiveRecord::Base
 
   def validate_user_balance
     unless enough_user_balance?
-      errors.add(:user, 'Not enough user money')
+      errors.add(:user, 'Have not enough money, please top up an account')
     end
   end
 

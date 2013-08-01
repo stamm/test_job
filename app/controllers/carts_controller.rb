@@ -10,7 +10,10 @@ class CartsController < AuthController
   # GET /carts/1
   # GET /carts/1.json
   def show
-
+    if @cart.line_items.empty?
+      redirect_to root_path
+      return
+    end
   end
 
   # GET /carts/new
@@ -20,6 +23,7 @@ class CartsController < AuthController
 
   # GET /carts/1/edit
   def edit
+    Time.now
   end
 
   # POST /carts
@@ -42,11 +46,14 @@ class CartsController < AuthController
   # PATCH/PUT /carts/1.json
   def update
     respond_to do |format|
-      if @cart.update(cart_params)
+      saved = @cart.update_attributes(cart_params)
+      puts 'ok'
+      @cart.line_items.select{ |item| item.quantity <= 0 }.map(&:destroy)
+      if saved
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to @cart, notice: 'Cart wasn\'t updated.' }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
     end
@@ -78,6 +85,6 @@ class CartsController < AuthController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
-      params[:cart]
+      params.require(:cart).permit(line_items_attributes: [:quantity, :product_id, :id])
     end
 end

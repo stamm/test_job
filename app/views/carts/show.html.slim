@@ -1,19 +1,22 @@
-table.table
-  tr
-    th = Cart.human_attribute_name(:quantity)
-    th = Cart.human_attribute_name(:title)
-    th = Cart.human_attribute_name(:price)
-  - @cart.line_items.each do |item|
+== form_for @cart, method: :patch do |cart_form|
+  table.table
     tr
-      td.item_count = content_tag :input, '', type: 'number', value: item.quantity
-      td = item.product.title
-      td.item_price = number_to_currency(item.total_price)
-      td = button_to 'Delete', line_item_path(item), method: :delete
-  tr
-    td colspan=2 Total
-    td.item_price = number_to_currency(@cart.total_price)
+      th = Cart.human_attribute_name(:quantity)
+      th = Cart.human_attribute_name(:title)
+      th = Cart.human_attribute_name(:price)
+    = cart_form.fields_for :line_items do |item_form|
+      tr
+        td.item_count
+          = item_form.text_field :quantity, type: 'number'
+          = item_form.hidden_field :product_id
+        td = item_form.object.product.title
+        td.item_price = number_to_currency(item_form.object.total_price)
+        td = link_to 'Delete', line_item_path(item_form.object), method: :delete
+    tr
+      td colspan=2 Total
+      td.item_price = number_to_currency(@cart.total_price)
+  div.buttons
+    == cart_form.submit 'Update'
 
-
-== button_to 'Checkout', orders_path, method: :post
-
+== button_to 'Checkout', orders_path, method: :post, class: 'checkout_button'
 == button_to 'Empty cart', @cart, method: :delete, confirm: 'Are you sure?'

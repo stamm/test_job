@@ -1,6 +1,8 @@
 class Cart < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
 
+  accepts_nested_attributes_for :line_items
+
   include TotalPrice
 
   def add_product(product_id)

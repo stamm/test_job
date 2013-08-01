@@ -9,16 +9,16 @@ To start a project you need a working MySQL database server and follow this step
 * Set parameters in config/application.yml
 * bundle install
 * Run tests:
-** RAILS_ENV=test bundle exec rake db:migrate
-** bundle exec rspec
+  * RAILS_ENV=test bundle exec rake db:migrate
+  * bundle exec rspec
 * To start in development:
-** bundle exec rake db:migrate
-** bundle exec rake db:seed
-** bundle exec rake assets:precompile
-** rails s
-** bundle exec guard
+  * bundle exec rake db:migrate
+  * bundle exec rake db:seed
+  * bundle exec rake assets:precompile
+  * rails s
+  * bundle exec guard
 * To start in production:
-** RAILS_ENV=production bundle exec rake db:migrate
-** RAILS_ENV=production bundle exec rake db:seed
-** RAILS_ENV=production bundle exec rake assets:precompile
-** rails s -e production
+  * RAILS_ENV=production bundle exec rake db:migrate
+  * RAILS_ENV=production bundle exec rake db:seed
+  * RAILS_ENV=production bundle exec rake assets:precompile
+  * rails s -e production

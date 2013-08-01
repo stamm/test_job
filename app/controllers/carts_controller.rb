@@ -68,6 +68,9 @@ class CartsController < AuthController
     def set_cart
       begin
         @cart = current_cart
+        if @cart.id != params[:id].to_i
+          redirect_to products_url, notice: 'Not yours Cart'
+        end
       rescue ActiveRecord::RecordNotFound
         redirect_to products_url, notice: 'Unexisting Cart'
       end

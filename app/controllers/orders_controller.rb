@@ -4,7 +4,7 @@ class OrdersController < AuthController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all_include.order_by_create.page(params[:page]).per(20)
+    @orders = Order.all_include.order_by_create.page(params[:page]).per(10)
   end
 
   # GET /orders/1
@@ -42,7 +42,7 @@ class OrdersController < AuthController
         format.json { render action: 'show', status: :created, location: @order }
       else
         notice = @order.errors.to_a unless @order.errors.empty?
-        format.html { redirect_to products_path, notice: notice.join('.') }
+        format.html { redirect_to @cart, notice: notice.join('.') }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end

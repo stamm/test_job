@@ -9,9 +9,8 @@ html
     div#container
       div#user_nav
         - if user_signed_in?
-          Logged as #{current_user.email}.
-          == link_to 'Edit profile', edit_user_registration_path
-          |  |
+          | Logged as #{current_user.email}. (#{number_to_currency(current_user.balance)})
+          | &nbsp;
           == link_to 'Logout', destroy_user_session_path, method: :delete
         - else
           == link_to 'Sign up', new_user_registration_path
@@ -19,6 +18,6 @@ html
           == link_to 'Login', new_user_session_path
 
         - flash.each do |name, msg|
-          == content_tag :div, msg, id: "flash_#{name}"
+          == content_tag :div, msg, id: "flash_#{name}", class: 'flash'
 
         = yield

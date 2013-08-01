@@ -5,7 +5,7 @@ class CartsController < AuthController
   # GET /carts/1.json
   def show
     if @cart.line_items.empty?
-      redirect_to root_path
+      redirect_to root_path, notice: 'Empty cart'
       return
     end
   end

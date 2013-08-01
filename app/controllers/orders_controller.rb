@@ -30,7 +30,7 @@ class OrdersController < AuthController
     respond_to do |format|
       notice = []
       begin
-        saved = @order.save
+        saved = @order.save_with_transaction
       rescue Exception => e
         notice = [e.message] || ['Error with order saving.']
       end

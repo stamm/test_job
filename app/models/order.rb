@@ -24,7 +24,7 @@ class Order < ActiveRecord::Base
         fail 'Your cart empty' if line_items_empty?
         fail 'Need more gold!' unless enough_user_balance?
         user.increment!(:balance, - total_price)
-        save!
+        save! validate: false
       end
     end
   end

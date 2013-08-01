@@ -25,6 +25,11 @@ class OrdersController < AuthController
   def create
     @cart = current_cart
 
+    if @cart.line_items.empty?
+      redirect_to root_path, notice: 'Empty cart'
+      return
+    end
+
     @order = Order.new
     @order.user = current_user
     @order.add_line_items_from_cart(current_cart)
@@ -38,7 +43,7 @@ class OrdersController < AuthController
       end
       if saved
         session[:cart_id] = nil
-        format.html { redirect_to products_path, notice: 'Order was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
         notice = @order.errors.to_a unless @order.errors.empty?

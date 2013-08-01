@@ -25,9 +25,9 @@ describe OrdersController do
   describe "GET #new" do
     it 'require items in cart' do
       get :create
-      expect(response).to redirect_to(products_path)
+      expect(response).to redirect_to(root_path)
     end
-    it do
+    it 'create order' do
       product = create :product
       item = LineItem.new
       item.build_cart
